@@ -32,7 +32,7 @@ export const routeToString = (
             pool.token1,
             pool.fee,
             undefined,
-            V3_CORE_FACTORY_ADDRESSES[pool.chainId]
+            pool.chainId == Number(process.env.REACT_APP_CHAIN_ID) ? process.env.REACT_APP_V3_CORE_FACTORY_ADDRESS : V3_CORE_FACTORY_ADDRESSES[pool.chainId]
           )}]`
         : ` -- [${Pair.getAddress(
             (pool as Pair).token0,

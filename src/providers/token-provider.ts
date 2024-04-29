@@ -36,6 +36,13 @@ export type TokenAccessor = {
   getAllTokens: () => Token[];
 };
 
+export const USD_TOKEN = new Token(
+  Number(process.env.REACT_APP_CHAIN_ID),
+  process.env.REACT_APP_USD_TOKEN_ADDRESS!,
+  Number(process.env.REACT_APP_USD_TOKEN_DECIMALS),
+  'USDC',
+  'USDC'
+)
 // Some well known tokens on each chain for seeding cache / testing.
 export const USDC_MAINNET = new Token(
   ChainId.MAINNET,

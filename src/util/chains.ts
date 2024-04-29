@@ -16,6 +16,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.BNB,
   ChainId.AVALANCHE,
   ChainId.BASE,
+  Number(process.env.REACT_APP_CHAIN_ID)
   // Gnosis and Moonbeam don't yet have contracts deployed yet
 ];
 
@@ -79,6 +80,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.BASE;
     case 84531:
       return ChainId.BASE_GOERLI;
+    case Number(process.env.REACT_APP_CHAIN_ID):
+      return Number(process.env.REACT_APP_CHAIN_ID);
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -103,7 +106,6 @@ export enum ChainName {
   BASE = 'base-mainnet',
   BASE_GOERLI = 'base-goerli',
 }
-
 
 export enum NativeCurrencyName {
   // Strings match input for CLI
@@ -197,6 +199,7 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.BNB]: NativeCurrencyName.BNB,
   [ChainId.AVALANCHE]: NativeCurrencyName.AVALANCHE,
   [ChainId.BASE]: NativeCurrencyName.ETHER,
+  [Number(process.env.REACT_APP_CHAIN_ID)]: NativeCurrencyName.ETHER
 };
 
 export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
@@ -235,6 +238,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case Number(process.env.REACT_APP_CHAIN_ID):
+      return ChainName.MAINNET;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -280,6 +285,13 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
 };
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
+  [Number(process.env.REACT_APP_CHAIN_ID)]: new Token(
+    Number(process.env.REACT_APP_CHAIN_ID),
+    process.env.REACT_APP_WRAPPED_NATIVE_CURRENCY_ADDRESS!,
+    Number(process.env.REACT_APP_CHAIN_DECIMALS),
+    `W${process.env.REACT_APP_CHAIN_SYMBOL!}`,
+    `Wrapped ${process.env.REACT_APP_CHAIN_SYMBOL!}`,
+  ),
   [ChainId.MAINNET]: new Token(
     1,
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',

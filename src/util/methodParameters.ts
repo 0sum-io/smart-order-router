@@ -236,7 +236,7 @@ export function buildSwapMethodParameters(
   if (swapConfig.type == SwapType.UNIVERSAL_ROUTER) {
     return {
       ...UniveralRouter.swapERC20CallParameters(trade, swapConfig),
-      to: UNIVERSAL_ROUTER_ADDRESS(chainId),
+      to: chainId == Number(process.env.REACT_APP_CHAIN_ID) ? process.env.REACT_APP_UNIVERSAL_ROUTER_ADDRESS! : UNIVERSAL_ROUTER_ADDRESS(chainId),
     };
   } else if (swapConfig.type == SwapType.SWAP_ROUTER_02) {
     const { recipient, slippageTolerance, deadline, inputTokenPermit } =

@@ -8,6 +8,7 @@ import {
   DAI_BNB,
   DAI_MAINNET,
   ITokenProvider,
+  USD_TOKEN,
   USDC_AVAX,
   USDC_BASE,
   USDC_BNB,
@@ -29,6 +30,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
   _tokenProvider: ITokenProvider
 ): ChainTokenList => {
   return {
+    [Number(process.env.REACT_APP_CHAIN_ID)]: [
+      USD_TOKEN
+    ],
     [ChainId.MAINNET]: [
       WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
       DAI_MAINNET,
