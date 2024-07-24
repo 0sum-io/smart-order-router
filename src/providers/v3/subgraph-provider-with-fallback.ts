@@ -34,6 +34,6 @@ export class V3SubgraphProviderWithFallBacks implements IV3SubgraphProvider {
       }
     }
 
-    throw new Error('Failed to get subgraph pools from any providers');
+    throw new Error('V3 Failed to get subgraph pools from any providers');
   }
 }

@@ -38,6 +38,6 @@ export class V2SubgraphProviderWithFallBacks implements IV2SubgraphProvider {
       }
     }
 
-    throw new Error('Failed to get subgraph pools from any providers');
+    throw new Error('V2 Failed to get subgraph pools from any providers');
   }
 }

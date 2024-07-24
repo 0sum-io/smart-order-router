@@ -18,6 +18,7 @@ type ChainTokenList = {
 };
 
 const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
+  [Number(process.env.REACT_APP_CHAIN_ID)]: [],
   [ChainId.MAINNET]: [
     WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
     DAI_MAINNET,

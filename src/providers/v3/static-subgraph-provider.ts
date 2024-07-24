@@ -50,6 +50,7 @@ import {
   USDT_MAINNET,
   USDT_OPTIMISM,
   USDT_OPTIMISM_GOERLI,
+  USD_TOKEN,
   WBTC_ARBITRUM,
   WBTC_GNOSIS,
   WBTC_GOERLI,
@@ -71,6 +72,10 @@ type ChainTokenList = {
 };
 
 const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
+  [Number(process.env.REACT_APP_CHAIN_ID)]: [
+    WRAPPED_NATIVE_CURRENCY[Number(process.env.REACT_APP_CHAIN_ID) as ChainId]!,
+    USD_TOKEN,
+  ],
   [ChainId.MAINNET]: [
     WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET]!,
     DAI_MAINNET,
