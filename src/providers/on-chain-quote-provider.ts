@@ -224,7 +224,7 @@ export type BlockNumberConfig = {
   rollback: BlockHeaderFailureOverrides;
 };
 
-const DEFAULT_BATCH_RETRIES = 2;
+const DEFAULT_BATCH_RETRIES = 5;
 
 /**
  * Computes on chain quotes for swaps. For pure V3 routes, quotes are computed on-chain using
@@ -271,21 +271,22 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
     protected multicall2Provider: UniswapMulticallProvider,
     protected retryOptions: QuoteRetryOptions = {
       retries: DEFAULT_BATCH_RETRIES,
-      minTimeout: 25,
-      maxTimeout: 250,
+      minTimeout: 2_000,
+      maxTimeout: 20_000,
+      factor: 2
     },
     protected batchParams: BatchParams = {
-      multicallChunk: 150,
-      gasLimitPerCall: 1_000_000,
-      quoteMinSuccessRate: 0.2,
+      multicallChunk: 5,
+      gasLimitPerCall: 2_000_000,
+      quoteMinSuccessRate: 0.3,
     },
     protected gasErrorFailureOverride: FailureOverrides = {
-      gasLimitOverride: 1_500_000,
-      multicallChunk: 100,
+      gasLimitOverride: 3_000_000,
+      multicallChunk: 3,
     },
     protected successRateFailureOverrides: FailureOverrides = {
-      gasLimitOverride: 1_300_000,
-      multicallChunk: 110,
+      gasLimitOverride: 1_000_000,
+      multicallChunk: 40,
     },
     protected blockNumberConfig: BlockNumberConfig = {
       baseBlockOffset: 0,
@@ -731,7 +732,7 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
             };
           }
           throw new Error(
-            `Failed to get ${failedQuoteStates.length} quotes. Reasons: ${reasonForFailureStr}`
+            `Failed to getttt ${failedQuoteStates.length} quotes. Reasons: ${reasonForFailureStr}`
           );
         }
 
